@@ -24,14 +24,13 @@ for page in pdf_text:
     for line in page.split('\n'):
         if start_keyword in line:
             record = True
-            continue  # Skip the line with the start keyword
+            continue
         if record:
             if end_keyword in line:
                 record = False
                 break
             questions_section.append(line)
 
-# Remove the first line if it's the header
 if questions_section and "ТИПОВЫЕ ВОПРОСЫ ПО ПРАКТИКЕ" in questions_section[0]:
     questions_section.pop(0)
 
@@ -39,7 +38,6 @@ questions_text = "\n".join(questions_section)
 
 questions = [line for line in questions_text.split("\n") if line.strip()]
 
-# Using regex to split questions into numbers and text
 questions_split = []
 for question in questions:
     match = re.match(r"(\d+)\s+(.*)", question)
