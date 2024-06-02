@@ -1,4 +1,3 @@
-/* Reset some default styles */
 body, h1, h2, p, ul, li, input, button {
     margin: 0;
     padding: 0;
@@ -6,7 +5,6 @@ body, h1, h2, p, ul, li, input, button {
     font-family: Arial, sans-serif;
 }
 
-/* Basic styles for the body */
 body {
     background-color: #f8f9fa;
     color: #343a40;
@@ -16,7 +14,6 @@ body {
     padding: 20px;
 }
 
-/* Header styles */
 header {
     background-color: #007bff;
     color: #fff;
@@ -31,7 +28,6 @@ header h1 {
     font-size: 24px;
 }
 
-/* Main content styles */
 main {
     width: 100%;
     max-width: 600px;
@@ -48,7 +44,6 @@ main h2 {
     color: #007bff;
 }
 
-/* Form styles */
 form {
     display: flex;
     flex-direction: column;
@@ -82,7 +77,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Styles for the pizza list */
 ul {
     list-style: none;
     margin-top: 20px;
@@ -96,7 +90,6 @@ li {
     margin-bottom: 10px;
 }
 
-/* Additional responsive styles */
 @media (max-width: 600px) {
     header, main {
         padding: 10px;
