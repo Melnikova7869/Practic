@@ -1,5 +1,6 @@
 import PyPDF2
 import pandas as pd
+import re
 
 def extract_text_from_pdf(pdf_path):
     pdf_text = []
@@ -23,17 +24,31 @@ for page in pdf_text:
     for line in page.split('\n'):
         if start_keyword in line:
             record = True
+            continue  # Skip the line with the start keyword
         if record:
-            if end_keyword[-1] in line:
+            if end_keyword in line:
                 record = False
                 break
             questions_section.append(line)
+
+# Remove the first line if it's the header
+if questions_section and "ТИПОВЫЕ ВОПРОСЫ ПО ПРАКТИКЕ" in questions_section[0]:
+    questions_section.pop(0)
 
 questions_text = "\n".join(questions_section)
 
 questions = [line for line in questions_text.split("\n") if line.strip()]
 
-questions_df = pd.DataFrame(questions, columns=["Типовые вопросы по практике"])
+# Using regex to split questions into numbers and text
+questions_split = []
+for question in questions:
+    match = re.match(r"(\d+)\s+(.*)", question)
+    if match:
+        questions_split.append((match.group(1), match.group(2)))
+    else:
+        questions_split.append(("", question))
+
+questions_df = pd.DataFrame(questions_split, columns=["Номер", "Типовые вопросы по практике"])
 excel_path = "D:\\pr.xlsx"
 questions_df.to_excel(excel_path, index=False)
 
